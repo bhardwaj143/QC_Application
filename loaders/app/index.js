@@ -11,6 +11,7 @@ const PORT = Number(privateKey.PORT) || 3000;
 const appLoader = async (app, router) => new Promise(resolve => {
     const server = createServer(app);
     app.use(express.json());
+    app.use('/uploads/', express.static('uploads/'));
     app.use(express.urlencoded({ extended: true }));
     app.use(morgan('dev'));
     app.use(cors());

@@ -7,7 +7,18 @@ export const responseMessages = {
     'INCORRECT_PASSWORD': 'Incorrect password',
     'LOGIN': 'Logged in successfully',
     'USER_NOT_FOUND': 'User not found',
-    'UNAUTHORIZED': 'Unauthorized'
+    'UNAUTHORIZED': 'Unauthorized',
+    'USER_NOTFOUND': 'User not found',
+    'UPDATE_USER': 'Profile Completed successfully',
+    'FETCH_USER': 'Fetch user successfully',
+    'FETCH_USERS': 'Fetch all user successfully',
+    'DELETE_USER': 'User deleted successfully',
+    'ADD_TEAM': 'Team Added successfully',
+    'FETCH_TEAM': 'Fetch team successfully',
+    'FETCH_TEAMS': 'Fetch all team successfully',
+    'TEAM_NOT_FOUND': 'Team not found',
+    'DELETE_TEAM': 'Team deleted successfully',
+    'UPDATE_TEAM_DETAILS': 'Team details udpated successfully',
 }
 
 export const notificationPayload = {}

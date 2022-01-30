@@ -1,33 +1,43 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import config from "config";
-import { hash, compare } from 'bcrypt';
 
 const { Schema, model } = mongoose;
 
 const userSchema = Schema({
-    otp: {
-        type: Number
-    },
-    name: {
+    profile_pic: {
         type: String,
-        required: true
+        required: false
     },
-    email: {
+    firstName: {
         type: String,
-        required: true
+        required: false
     },
-    password: {
+    mobile: {
+		type: Number,
+		unique: false
+	},
+    lastName: {
+        type: String,
+        required: false
+    },
+    city: {
         type: String
+    },
+    state: {
+        type: String  
     },
     role: {
         type: String,
-        enum: ['Trainer', 'User', 'Admin'],
-        default: 'User'
+        enum: ['batsman', 'bowler', 'wicket_keeper', 'all_rounder'],
     },
-    isOnline: {
+    roleType: {
+        type: String,
+        enum: ['R_Hand', 'L_Hand'],
+    },
+    isFirstTime: {
         type: Boolean,
-        default: false
+        default: true
     },
     isDeleted: {
         type: Boolean,
@@ -37,30 +47,12 @@ const userSchema = Schema({
     timestamps: true
 });
 
-userSchema.pre("save", async function (next) {  
-    let user = this;
-    if (!user.isModified("password")) {
-      return next();
-    }  
-    const hashPassword = await hash(user.password, 12);
-    user.password = hashPassword; 
-    return next();
-});
-
 userSchema.methods.generateAuthToken = function (_id, role) {
     return jwt.sign({ id: _id, role }, config.get("privateKey"), { expiresIn: '15d' });
 };
 
 userSchema.methods.generateRefershToken = function (_id, role) {
     return jwt.sign({ id: _id, role }, config.get("privateKey"), { expiresIn: '30d' });
-};
-
-userSchema.methods.comparePassword = function (raw, encrypted) {
-    return new Promise((resolve, reject) => {
-      compare(raw, encrypted)
-      .then(resolve)
-      .catch(reject);
-    });
 };
 
 export const User = model('User', userSchema);

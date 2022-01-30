@@ -3,18 +3,16 @@ import Joi from 'joi';
 // Validation Cases
 export const validationSchema = (action) => {
     switch (action) {
-        case 'ADD_USER': {
+        case 'ADD_TEAM': {
             return {
-                email: Joi.string().email().required(),
-                password: Joi.string().required(),
-                name: Joi.string().required()
+                teamName: Joi.string().required(),
+                teamcity: Joi.string().required()
             };
         }
         case 'LOGIN': {
             return {
-                email: Joi.string().email().required(),
-                password: Joi.string().required()
-            };
+                mobile: Joi.number().required(),
+              };
         }
     }
     return {};
