@@ -14,7 +14,7 @@ import {
 const { SUCCESS, NOT_FOUND } = statusCodes;
 
 //Response Messages
-const { ALREADY_EXIST, FETCH_TEAM, FETCH_TEAMS, DELETE_TEAM, INCORRECT_PASSWORD, ADD_TEAM, TEAM_NOT_FOUND, UPDATE_TEAM_DETAILS } = responseMessages;
+const { PLAYER_ADDED , FETCH_TEAM, FETCH_TEAMS, DELETE_TEAM, ADD_TEAM, TEAM_NOT_FOUND, UPDATE_TEAM_DETAILS } = responseMessages;
 
 
 const router = Router();
@@ -44,7 +44,7 @@ router.get('/:id', auth, catchAsyncAction(async (req, res) => {
 //Get All Teams
 router.get('/', auth, catchAsyncAction(async (req, res) => {
     const team = await findAllTeams()
-    if (team) return makeResponse(res, SUCCESS, true, FETCH_TEAM, team);
+    if (team) return makeResponse(res, SUCCESS, true, FETCH_TEAMS, team);
     if (!team) return makeResponse(res, NOT_FOUND, false, TEAM_NOT_FOUND);
 }));
 
@@ -56,8 +56,8 @@ router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
 
 //ADD-Player
 router.patch('/add_player', auth, catchAsyncAction(async (req, res) => {
-    let updateTeamDetail = await updateTeamDetails(req.body, { _id: req.query.id });
-    return makeResponse(res, SUCCESS, true, UPDATE_TEAM_DETAILS, updateTeamDetail);
+    let addedPlayer = await updateTeamDetails(req.body, { _id: req.query.id });
+    return makeResponse(res, SUCCESS, true, PLAYER_ADDED, addedPlayer);
 }));
 
 export const teamsController = router;

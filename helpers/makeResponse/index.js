@@ -19,6 +19,7 @@ export const responseMessages = {
     'TEAM_NOT_FOUND': 'Team not found',
     'DELETE_TEAM': 'Team deleted successfully',
     'UPDATE_TEAM_DETAILS': 'Team details udpated successfully',
+    'PLAYER_ADDED': 'Player In The Added successfully',
 }
 
 export const notificationPayload = {}
