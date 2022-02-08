@@ -35,7 +35,7 @@ router.patch('/', upload.fields([{ name: 'team_logo', maxCount: 1 }]), auth, cat
 
 //Get Team By Id
 router.get('/:id', auth, catchAsyncAction(async (req, res) => {
-    const team = await findTeamById({ _id: req.params.id })
+    let team = await findTeamById({ _id: req.params.id })
     if (team) return makeResponse(res, SUCCESS, true, FETCH_TEAM, team);
     if (!team) return makeResponse(res, NOT_FOUND, false, TEAM_NOT_FOUND);
 }));
@@ -43,7 +43,7 @@ router.get('/:id', auth, catchAsyncAction(async (req, res) => {
 
 //Get All Teams
 router.get('/', auth, catchAsyncAction(async (req, res) => {
-    const team = await findAllTeams()
+    let team = await findAllTeams()
     if (team) return makeResponse(res, SUCCESS, true, FETCH_TEAMS, team);
     if (!team) return makeResponse(res, NOT_FOUND, false, TEAM_NOT_FOUND);
 }));

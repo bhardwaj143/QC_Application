@@ -11,6 +11,7 @@ export const validationSchema = (action) => {
         }
         case 'LOGIN': {
             return {
+                countoryCode: Joi.string().required(),
                 mobile: Joi.number().required(),
               };
         }

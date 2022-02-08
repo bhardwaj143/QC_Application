@@ -8,14 +8,15 @@ import {
     updateUser,
     findUserById,
     findAllUsers,
-    deleteUser
+    deleteUser,
+    findAllUmpireScorer
 } from '../../services/index.js';
 
 //Response Status code
 const { SUCCESS, NOT_FOUND } = statusCodes;
 
 //Response Messages
-const { ALREADY_EXIST, FETCH_USER, FETCH_USERS, DELETE_USER, INCORRECT_PASSWORD, LOGIN, USER_NOTFOUND, UPDATE_USER } = responseMessages;
+const { ALREADY_EXIST, FETCH_USER, FETCH_USERS, DELETE_USER, FETCH_ALL_UMOIRE_SCORER, UMPIRE_SCORER_NOT_FOUND, LOGIN, USER_NOTFOUND, UPDATE_USER } = responseMessages;
 
 
 const router = Router();
@@ -65,6 +66,13 @@ router.get('/', auth, catchAsyncAction(async (req, res) => {
 router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
     let user = await deleteUser({ _id: req.params.id });
     return makeResponse(res, SUCCESS, true, DELETE_USER);
+}));
+
+//Find Umpire scorer by role
+router.get('/by_role', catchAsyncAction(async (req, res) => {
+    let umpire_scorer = await findAllUmpireScorer({role: req.body.role})
+    if (umpire_scorer) return makeResponse(res, SUCCESS, true, FETCH_ALL_UMOIRE_SCORER, umpire_scorer);
+    if (!umpire_scorer) return makeResponse(res, NOT_FOUND, false, UMPIRE_SCORER_NOT_FOUND);
 }));
 
 export const userController = router;

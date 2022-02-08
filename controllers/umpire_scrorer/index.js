@@ -20,7 +20,7 @@ const { FETCH_UMPIRE_SCORER, FETCH_ALL_UMOIRE_SCORER, DELETE_UMPIRE_SCORER, ADD_
 const router = Router();
 
 //Add umpire scorer
-router.post('/', validators('ADD_UMPIRE_SCORER'), catchAsyncAction(async (req, res) => {
+router.post('/', catchAsyncAction(async (req, res) => {
     let addUmpire_scorer = await addUmpireScorer(req.body);
     return makeResponse(res, SUCCESS, true, ADD_UMPIRE_SCORER, addUmpire_scorer);
 }));
@@ -52,12 +52,4 @@ router.delete('/:id', catchAsyncAction(async (req, res) => {
     return makeResponse(res, SUCCESS, true, DELETE_UMPIRE_SCORER);
 }));
 
-//Find Umpire scorer by role
-router.get('/byRole', catchAsyncAction(async (req, res) => {
-    let umpire_scorer = await findAllUmpireScorer({role: req.body.role})
-    if (umpire_scorer) return makeResponse(res, SUCCESS, true, FETCH_ALL_UMOIRE_SCORER, umpire_scorer);
-    if (!umpire_scorer) return makeResponse(res, NOT_FOUND, false, UMPIRE_SCORER_NOT_FOUND);
-}));
-
 export const umpireScorerController = router;
-
