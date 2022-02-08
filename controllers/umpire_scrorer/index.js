@@ -47,7 +47,7 @@ router.get('/', catchAsyncAction(async (req, res) => {
 }));
 
 //Delete umpire scorer
-router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
+router.delete('/:id', catchAsyncAction(async (req, res) => {
     let umpire_scorer = await deleteUmpireScorer({ _id: req.params.id });
     return makeResponse(res, SUCCESS, true, DELETE_UMPIRE_SCORER);
 }));
@@ -59,5 +59,5 @@ router.get('/byRole', catchAsyncAction(async (req, res) => {
     if (!umpire_scorer) return makeResponse(res, NOT_FOUND, false, UMPIRE_SCORER_NOT_FOUND);
 }));
 
-export const teamsController = router;
+export const umpireScorerController = router;
 
