@@ -14,11 +14,17 @@ export const responseMessages = {
     'FETCH_USERS': 'Fetch all user successfully',
     'DELETE_USER': 'User deleted successfully',
     'ADD_TEAM': 'Team Added successfully',
+    'ADD_UMPIRE_SCORER': 'Umpire Scorer Added successfully',
     'FETCH_TEAM': 'Fetch team successfully',
+    'FETCH_UMPIRE_SCORER': 'Fetch umpire scorer successfully',
     'FETCH_TEAMS': 'Fetch all team successfully',
+    'FETCH_ALL_UMOIRE_SCORER': 'Fetch all umpire scorer successfully',
     'TEAM_NOT_FOUND': 'Team not found',
+    'UMPIRE_SCORER_NOT_FOUND': 'Team not found',
     'DELETE_TEAM': 'Team deleted successfully',
+    'DELETE_UMPIRE_SCORER': 'Umpire scorer deleted successfully',
     'UPDATE_TEAM_DETAILS': 'Team details udpated successfully',
+    'UPDATE_UMPIRE_SCORER': 'Umpire Scorer details udpated successfully',
     'PLAYER_ADDED': 'Player In The Added successfully',
 }
 

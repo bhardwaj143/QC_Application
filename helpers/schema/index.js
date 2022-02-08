@@ -14,6 +14,12 @@ export const validationSchema = (action) => {
                 mobile: Joi.number().required(),
               };
         }
+        case 'ADD_UMPIRE_SCORER': {
+            return {
+                name: Joi.string().optional(),
+                mobile: Joi.string().optional()
+            };
+        }
     }
     return {};
 };

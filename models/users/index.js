@@ -13,6 +13,10 @@ const userSchema = Schema({
         type: String,
         required: false
     },
+    countoryCode: {
+        type: String,
+        required: false
+    },
     mobile: {
 		type: Number,
 		unique: false

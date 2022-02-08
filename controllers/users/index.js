@@ -27,7 +27,7 @@ router.post('/login', validators('LOGIN'), catchAsyncAction(async (req, res) => 
     if (user) {
         const accessToken = user.generateAuthToken(user._id);
         const refreshToken = user.generateRefershToken(user._id);
-        return makeResponse(res, NOT_FOUND, false, ALREADY_EXIST, user, { accessToken, refreshToken });
+        return makeResponse(res, SUCCESS, true, ALREADY_EXIST, user, { accessToken, refreshToken });
     }
     if (!user) {
         let add_User = await addUser(req.body);
