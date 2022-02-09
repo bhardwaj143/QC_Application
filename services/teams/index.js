@@ -13,6 +13,7 @@ export const addTeam = async (payload = {}) => {
 // //Find Team by Id
 export const findTeamById = (search = {}) => new Promise((resolve, reject) => {
 	Teams.findOne(search).select('-password')
+		.populate('participants')
 		.then(resolve)
 		.catch(reject)
 });
@@ -43,7 +44,7 @@ export const getTeamsCount = (search) => new Promise((resolve, reject) => {
 
 //Delete Team
 export const deleteTeams = (id) => new Promise((resolve, reject) => {
-    Teams.updateMany({ _id: { $in: id } }, { $set: { isDeleted: true } })
-        .then(resolve)
-        .catch(reject)
+	Teams.updateMany({ _id: { $in: id } }, { $set: { isDeleted: true } })
+		.then(resolve)
+		.catch(reject)
 })
