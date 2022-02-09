@@ -52,11 +52,11 @@ const userSchema = Schema({
 });
 
 userSchema.methods.generateAuthToken = function (_id, role) {
-    return jwt.sign({ id: _id, role }, config.get("privateKey"), { expiresIn: '15d' });
+    return jwt.sign({ id: _id, role }, config.get("privateKey"), { expiresIn: '60d' });
 };
 
 userSchema.methods.generateRefershToken = function (_id, role) {
-    return jwt.sign({ id: _id, role }, config.get("privateKey"), { expiresIn: '30d' });
+    return jwt.sign({ id: _id, role }, config.get("privateKey"), { expiresIn: '90d' });
 };
 
 export const User = model('User', userSchema);
