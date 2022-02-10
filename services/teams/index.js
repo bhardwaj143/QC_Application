@@ -28,6 +28,7 @@ export const updateTeamDetails = (userprops = {}, condition = {}) => new Promise
 //Find all Teams
 export const findAllTeams = (search = {}, skip, limit) => new Promise((resolve, reject) => {
 	Teams.find(search)
+		.populate('participants.userId')
 		.skip(skip).limit(limit)
 		.sort('-createdAt')
 		.then(resolve)

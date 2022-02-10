@@ -57,7 +57,9 @@ router.get('/me', auth, catchAsyncAction(async (req, res) => {
 
 //Get All Users
 router.get('/', auth, catchAsyncAction(async (req, res) => {
-    const user = await findAllUsers()
+    let regx;
+    regx = new RegExp(req.query.search);
+    const user = await findAllUsers({isDeleted: false, $or: [{ 'firstName': { '$regex': regx, $options: 'i' } }]})
     if (user) return makeResponse(res, SUCCESS, true, FETCH_USERS, user);
     if (!user) return makeResponse(res, NOT_FOUND, false, USER_NOTFOUND);
 }));

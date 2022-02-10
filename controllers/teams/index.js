@@ -14,7 +14,7 @@ import {
 const { SUCCESS, NOT_FOUND } = statusCodes;
 
 //Response Messages
-const { PLAYER_ADDED , FETCH_TEAM, FETCH_TEAMS, DELETE_TEAM, ADD_TEAM, TEAM_NOT_FOUND, UPDATE_TEAM_DETAILS } = responseMessages;
+const { PLAYER_ADDED, FETCH_TEAM, FETCH_TEAMS, DELETE_TEAM, ADD_TEAM, TEAM_NOT_FOUND, UPDATE_TEAM_DETAILS } = responseMessages;
 
 
 const router = Router();
@@ -22,8 +22,8 @@ const router = Router();
 //Add Team
 router.post('/', upload.fields([{ name: 'team_logo', maxCount: 1 }]), validators('ADD_TEAM'), auth, catchAsyncAction(async (req, res) => {
     if (req?.files?.team_logo?.length > 0) req.body.team_logo = req.files.team_logo[0].path;
-        let add_team = await addTeam(req.body);
-        return makeResponse(res, SUCCESS, true, ADD_TEAM, add_team);
+    let add_team = await addTeam(req.body);
+    return makeResponse(res, SUCCESS, true, ADD_TEAM, add_team);
 }));
 
 //Update Teams Details
@@ -43,7 +43,9 @@ router.get('/:id', auth, catchAsyncAction(async (req, res) => {
 
 //Get All Teams
 router.get('/', auth, catchAsyncAction(async (req, res) => {
-    let team = await findAllTeams()
+    let regx;
+    regx = new RegExp(req.query.search);
+    let team = await findAllTeams({ isDeleted: false, $or: [{ 'teamName': { '$regex': regx, $options: 'i' } }] })
     if (team) return makeResponse(res, SUCCESS, true, FETCH_TEAMS, team);
     if (!team) return makeResponse(res, NOT_FOUND, false, TEAM_NOT_FOUND);
 }));

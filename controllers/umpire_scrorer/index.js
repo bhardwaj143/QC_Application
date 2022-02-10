@@ -41,7 +41,9 @@ router.get('/:id', catchAsyncAction(async (req, res) => {
 
 //Get All umpire scorer
 router.get('/', catchAsyncAction(async (req, res) => {
-    let umpire_scorer = await findAllUmpireScorer()
+    let regx;
+    regx = new RegExp(req.query.search);
+    let umpire_scorer = await findAllUmpireScorer({ isDeleted: false, $or: [{ 'name': { '$regex': regx, $options: 'i' } }] })
     if (umpire_scorer) return makeResponse(res, SUCCESS, true, FETCH_ALL_UMOIRE_SCORER, umpire_scorer);
     if (!umpire_scorer) return makeResponse(res, NOT_FOUND, false, UMPIRE_SCORER_NOT_FOUND);
 }));
