@@ -16,7 +16,7 @@ const participantSchema = new mongoose.Schema({
 const TeamsSchema = Schema({
     team_logo: {
         type: String,
-        required: true
+        required: false
     },
     teamName: {
         type: String,
