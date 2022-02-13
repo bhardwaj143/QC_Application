@@ -24,6 +24,8 @@ export const findMember = (search = {}) => new Promise((resolve, reject) => {
 		.catch(reject)
 });
 
+
+
 //Update Team
 export const updateTeamDetails = (userprops = {}, condition = {}) => new Promise((resolve, reject) => {
 	console.log(userprops)
