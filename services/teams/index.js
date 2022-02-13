@@ -18,6 +18,12 @@ export const findTeamById = (search = {}) => new Promise((resolve, reject) => {
 		.catch(reject)
 });
 
+export const findMember = (search = {}) => new Promise((resolve, reject) => {
+	Teams.findOne(search).select('-password')
+		.then(resolve)
+		.catch(reject)
+});
+
 //Update Team
 export const updateTeamDetails = (userprops = {}, condition = {}) => new Promise((resolve, reject) => {
 	console.log(userprops)

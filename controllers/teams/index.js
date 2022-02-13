@@ -7,7 +7,8 @@ import {
     updateTeamDetails,
     findTeamById,
     findAllTeams,
-    deleteTeams
+    deleteTeams,
+    findMember
 } from '../../services/index.js';
 
 //Response Status code
@@ -76,8 +77,7 @@ router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
 //ADD-Player
 router.patch('/add_player', catchAsyncAction(async (req, res) => {
     let members = [];
-    let team = await findTeamById({ _id: req.query.id });
-    return console.log("><><<><><<><><><><><><><",team)
+    let team = await findMember({ _id: req.query.id });
     members = team.participants;
     members = members.concat(req.body.participants);
     let addedPlayer = await updateTeamDetails({ participants: members }, { _id: req.query.id });
