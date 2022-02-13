@@ -25,7 +25,7 @@ export const responseMessages = {
     'DELETE_UMPIRE_SCORER': 'Umpire scorer deleted successfully',
     'UPDATE_TEAM_DETAILS': 'Team details udpated successfully',
     'UPDATE_UMPIRE_SCORER': 'Umpire Scorer details udpated successfully',
-    'PLAYER_ADDED': 'Player In The Added successfully',
+    'PLAYER_ADDED': 'Player Added successfully',
 }
 
 export const notificationPayload = {}
