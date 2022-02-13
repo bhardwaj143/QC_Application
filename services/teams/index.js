@@ -20,6 +20,7 @@ export const findTeamById = (search = {}) => new Promise((resolve, reject) => {
 
 //Update Team
 export const updateTeamDetails = (userprops = {}, condition = {}) => new Promise((resolve, reject) => {
+	console.log(userprops)
 	Teams.findOneAndUpdate(condition, { $set: userprops }, { new: true })
 		.then(resolve)
 		.catch(reject);

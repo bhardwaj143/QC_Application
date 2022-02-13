@@ -13,6 +13,7 @@ export const addUmpireScorer = async (payload = {}) => {
 // //Find Team by Id
 export const findUmpireScorerById = (search = {}) => new Promise((resolve, reject) => {
 	Umpire_Scorer.findOne(search).select('-password')
+		.populate('userId')
 		.then(resolve)
 		.catch(reject)
 });
@@ -27,6 +28,7 @@ export const updateUmpireScorerDetail = (userprops = {}, condition = {}) => new 
 //Find all Teams
 export const findAllUmpireScorer = (search = {}, skip, limit) => new Promise((resolve, reject) => {
 	Umpire_Scorer.find(search)
+		.populate('userId')
 		.skip(skip).limit(limit)
 		.sort('-createdAt')
 		.then(resolve)
@@ -43,7 +45,7 @@ export const getumpireScorerCount = (search) => new Promise((resolve, reject) =>
 
 //Delete Team
 export const deleteUmpireScorer = (id) => new Promise((resolve, reject) => {
-    Umpire_Scorer.updateMany({ _id: { $in: id } }, { $set: { isDeleted: true } })
-        .then(resolve)
-        .catch(reject)
+	Umpire_Scorer.updateMany({ _id: { $in: id } }, { $set: { isDeleted: true } })
+		.then(resolve)
+		.catch(reject)
 })

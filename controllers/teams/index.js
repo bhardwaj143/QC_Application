@@ -58,8 +58,12 @@ router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
 
 //ADD-Player
 router.patch('/add_player', catchAsyncAction(async (req, res) => {
-    console.log("get request:---------", req)
-    let addedPlayer = await updateTeamDetails(req.body, { _id: req.query.id });
+    let members = [];
+    let team = await findTeamById({ _id: req.query.id });
+    members = team.participants;
+    members = members.concat(req.body.participants);
+    console.log(members)
+    let addedPlayer = await updateTeamDetails({ participants: members }, { _id: req.query.id });
     return makeResponse(res, SUCCESS, true, PLAYER_ADDED, addedPlayer);
 }));
 
