@@ -25,6 +25,10 @@ const TeamsSchema = Schema({
     teamcity: {
         type: String
     },
+    createdBy: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    },
     participants: {
         type: [participantSchema],
         default: []

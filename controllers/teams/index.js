@@ -42,10 +42,10 @@ router.get('/:id', auth, catchAsyncAction(async (req, res) => {
 
 
 //Get All Teams
-router.get('/', auth, catchAsyncAction(async (req, res) => {
+router.get('/', catchAsyncAction(async (req, res) => {
     let regx;
     regx = new RegExp(req.query.search);
-    let team = await findAllTeams({ isDeleted: false, $or: [{ 'teamName': { '$regex': regx, $options: 'i' } }] })
+    let team = await findAllTeams({ isDeleted: false, $or: [{ 'teamName': { '$regex': regx, $options: 'i' } }], createdBy: req.body._id })
     if (team) return makeResponse(res, SUCCESS, true, FETCH_TEAMS, team);
     if (!team) return makeResponse(res, NOT_FOUND, false, TEAM_NOT_FOUND);
 }));
@@ -57,7 +57,8 @@ router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
 }));
 
 //ADD-Player
-router.patch('/add_player', auth, catchAsyncAction(async (req, res) => {
+router.patch('/add_player', catchAsyncAction(async (req, res) => {
+    console.log("get request:---------", req)
     let addedPlayer = await updateTeamDetails(req.body, { _id: req.query.id });
     return makeResponse(res, SUCCESS, true, PLAYER_ADDED, addedPlayer);
 }));

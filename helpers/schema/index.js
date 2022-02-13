@@ -6,7 +6,8 @@ export const validationSchema = (action) => {
         case 'ADD_TEAM': {
             return {
                 teamName: Joi.string().required(),
-                teamcity: Joi.string().required()
+                teamcity: Joi.string().required(),
+                createdBy: Joi.string().required()
             };
         }
         case 'LOGIN': {
