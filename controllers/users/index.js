@@ -72,7 +72,7 @@ router.delete('/:id', auth, catchAsyncAction(async (req, res) => {
 
 //Find Umpire scorer by role
 router.get('/by_role', catchAsyncAction(async (req, res) => {
-    let umpire_scorer = await findAllUmpireScorer({role: req.body.role})
+    let umpire_scorer = await findAllUmpireScorer({role: req.params.role})
     if (umpire_scorer) return makeResponse(res, SUCCESS, true, FETCH_ALL_UMOIRE_SCORER, umpire_scorer);
     if (!umpire_scorer) return makeResponse(res, NOT_FOUND, false, UMPIRE_SCORER_NOT_FOUND);
 }));
